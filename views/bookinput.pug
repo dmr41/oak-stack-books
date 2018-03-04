@@ -1,0 +1,120 @@
+block content
+  .main.container
+    .row
+      .col-md-6.col-md-offset-3
+        h1.display-4.m-b-2 Book Input page
+        form(method='POST' action='/bookinput')
+          div.form-group
+            label(for='evaluator') Evaluator  
+            input.formt-control(type='text' id='evaluator' placeholder='evaluator' name='evaluator')
+          div.form-group
+            label(for='firstName') First Name
+            input.form-control(type='text' id='firstName' placeholder='first name' name='first')
+          div.form-group
+            label(for='lastName') Last Name
+            input.form-control(type='text' id='lastName' placeholder='last name' name='last')
+          div.form-group
+            label(for='title') Title
+            input.form-control(type='text' id='title' placeholder='title' name='title')
+          div.form-group
+            label(for='publisher') Publisher
+            input.form-control(type='text' id='publisher' placeholder='publisher' name='publisher')
+          div.form-group
+            label(for='year') Year
+            input.form-control(type='text' id='year' placeholder='year' name='year')
+          div.form-group
+            label(for='condition') Condition
+            select(id='bill' name='bill')
+                option(value="veryGood") As New - Immaculate condition as when it was published.
+                option(value="fine") Fine - No defects to the book, jacket or pages.
+                option(value="veryGood") Very Good - Shows some small signs of wear, no tears on either binding or paper.
+                option(value="good") Good - Average used worn book that has all pages or leaves present.
+                option(value="fair") Fair - Worn book that has complete text pages (including those with maps or plates) but may lack endpapers, half-title, etc. (which must be noted). Binding, jacket (if any), etc., may also be worn. 
+                option(value="poor") Poor - May be soiled, scuffed, stained or spotted and may have loose joints, hinges, pages - sufficiently worn.
+                option(value="bindingCopy") Binding Copy - The pages or leaves are perfect but the binding is very bad, loose, off, or nonexistent.
+                option(value="readingCopy") Reading Copy - A poor to fair condition book that includes all text presented in a legible fashion.
+          div.form-group
+            label(for='dustJacket') Dust Jacket
+            input.formt-control(type='checkbox' id='dustJacket' checked=false name='dustJacket')
+          div.form-group
+            label(for='isSlate') Slate book
+            input.formt-control(type='checkbox' checked=false id='edition' name='edition')
+          div.form-group
+            label(for='signed') Signed
+            input.form-control(type='checkbox' checked=false id='signed' placeholder='signed' name='signed')
+          div.form-group
+            label(for='Edition') Edition
+            select(id='bill' name='bill')
+                option(value=1) 1st
+                option(value=2) 2nd
+                option(value=3) 3rd 
+                option(value=4) 4th
+                option(value=100) 5+
+                option(value=200) Undetermined
+          div.form-group
+              label(for='bowed') Bowed - A condition of the covers or boards of a hard cover book. Bowed covers may turn inward toward the leaves or outward away from the leaves.
+              input.form-control(type='checkbox' id='bowed' checked=false name='bowed')
+          div.form-group
+              label(for='chipped') Chipped - Used to describe where small pieces are missing from the edges of the boards or where fraying has occurred on a dust jacket or the edge of a paperback.
+              input.form-control(type='checkbox' id='chipped' checked=false name='chipped')
+          div.form-group
+              label(for='dampstained') Dampstained - A light stain on the cover or on the leaves of a book caused by moisture such as a piece of food or perspiration. Generally not as severe as waterstains.
+              input.form-control(type='checkbox' id='dampstained' checked=false name='dampstained')
+          div.form-group
+              label(for='darkeningFading') Darkening or Fading - When book covers are exposed to light, the color darkens or becomes more intense. See also tape shadow.
+              input.form-control(type='checkbox' id='darkeningFading'  checked=false name='darkeningFading')
+          div.form-group
+              label(for='edgeworn') Edgeworn - Wear along the edges of hardback book covers.
+              input.form-control(type='checkbox' id='edgeworn'  checked=false name='edgeworn')
+          div.form-group
+              label(for='exLibrary') Ex-library - the book was once owned by, and circulated in, a public library.
+              input.form-control(type='checkbox' id='exLibrary' checked=false name='exLibrary')
+          div.form-group
+              label(for='foxed') Foxed - Brown spotting of the paper caused by a chemical reaction, generally found in 19th century books, particularly in steel engravings of the period.
+              input.form-control(type='checkbox' id='foxed' checked=false name='foxed')
+          div.form-group
+              label(for='loose') Loose - The binding is loose such that a well-used book may lay flat and remain open to any page in the book.
+              input.form-control(type='checkbox' id='loose' checked=false name='loose')
+          div.form-group
+              label(for='madeUpCopy') Made-up Copy - A copy of a book whose parts have been assembled from one or more defective copies.
+              input.form-control(type='checkbox' id='madeUpCopy' checked=false name='madeUpCopy')
+          div.form-group
+              label(for='priceClipped') Price Clipped - The price has been clipped from the corner of the dust jacket.
+              input.form-control(type='checkbox' id='priceClipped' checked=false name='priceClipped')
+          div.form-group
+              label(for='reBacked') Re-backed - A book that has been repaired by replacing the spine and mending the hinges.
+              input.form-control(type='checkbox' id='reBacked' checked=false name='reBacked')
+          div.form-group
+              label(for='reCased') Re-cased - A book that has been glued back into its covers after having been shaken loose.
+              input.form-control(type='checkbox' id='reCased' checked=false name='reCased')
+          div.form-group
+              label(for='reJointed') Re-jointed - The book has been repaired preserving the original covers, including the spine.
+              input.form-control(type='checkbox' id='reJointed' checked=false name='reJointed')
+          div.form-group
+              label(for='shaken') Shaken - A book whose pages are beginning to come loose from the binding.
+              input.form-control(type='checkbox' id='shaken' checked=false name='shaken')
+          div.form-group
+              label(for='shelfWear') Shelf Wear - The wear that occurs as a book is placed onto and removed from a shelf. It may be to the tail (bottom) edge of the covers as they rub against the shelf, to the dust jacket or exterior of the covers (when no dust jacket is present) as the book rubs against its neighbors, or to the head of the spine which some use to pull the book from the shelf.
+              input.form-control(type='checkbox' id='shelfWear' checked=false name='shelfWear')
+          div.form-group
+              label(for='sunned') Sunned - Faded from exposure to light or direct sunlight.
+              input.form-control(type='checkbox' id='sunned' checked=false name='sunned')
+          div.form-group
+              label(for='tight') Tight - The binding of a new book is very tight and will not open easily.
+              input.form-control(type='checkbox' id='tight' checked=false name='tight')
+          div.form-group
+              label(for='trimmed') Trimmed - The pages have been cut down to a size smaller than when originally issued.
+              input.form-control(type='checkbox' id='trimmed' checked=false name='trimmed')
+          div.form-group
+              label(for='unopened') Unopened - The leaves of the book are still joined at the folds, not slit apart.
+              input.form-control(type='checkbox' id='unopened' checked=false name='unopened')
+          div.form-group
+              label(for='workingCopy') Working copy - More damaged than a reading copy with multiple defects, may need repair.
+              input.form-control(type='checkbox' id='workingCopy' checked=false name='workingCopy')
+          div.form-group
+              label(for='worming') Worming - Small holes resulting from bookworms (the larvae of various beetles.)
+              input.form-control(type='checkbox' id='worming' checked=false name='worming')
+          div.form-group
+            label(for='comment') Comments
+            input.form-control(type='text-area' id='comment' placeholder='comment' name='comment')
+          button.btn.btn-primary(type='submit') Submit 
