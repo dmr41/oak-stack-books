@@ -1,10 +1,10 @@
 extends layout
-
 block content
   .main.container
     .row
-      .col-md-2.col-md-offset-3
+      .col-md-4.col-md-offset-3
         h1.display-4.m-b-2 Book Input page
+        a(href='#', data-toggle='tooltip', title='Some text') Hover over me
         form(method='POST' action='/bookinput')
           div.form-group
             label(for='evaluator') Evaluator
@@ -38,92 +38,103 @@ block content
                 option(value="poor") Poor - May be soiled, scuffed, stained or spotted and may have loose joints, hinges, pages - sufficiently worn.
                 option(value="bindingCopy") Binding Copy - The pages or leaves are perfect but the binding is very bad, loose, off, or nonexistent.
                 option(value="readingCopy") Reading Copy - A poor to fair condition book that includes all text presented in a legible fashion.
+      .col-md-6.col-md-offset-3
+          table(class='table')
+            thead(class='thead-dark')
+              tr
+                th(scope='col') attribute
+                th(scope='col') value
+            tbody
+              tr
+                td
+                  label(for='dustJacket') Dust Jacket
+                td
+                  input.formt-control(type='checkbox' id='dustJacket' checked=false name='dustJacket')
+          div.form-group
+            label(for='Edition') Edition
+            select(id='edition' name='edition')
+              option(value=1) 1st
+              option(value=2) 2nd
+              option(value=3) 3rd
+              option(value=4) 4th
+              option(value=100) 5+
+              option(value=200) Undetermined
+      .col-md-2.col-md-offset-3
           div.form-group
             label(for='dustJacket') Dust Jacket
             input.formt-control(type='checkbox' id='dustJacket' checked=false name='dustJacket')
           div.form-group
             label(for='isSlate') Slate book
-            input.formt-control(type='checkbox' checked=false id='edition' name='edition')
+            input.formt-control(type='checkbox' checked=false id='isSlate' name='isSlate')
           div.form-group
             label(for='signed') Signed
-            input.form-control(type='checkbox' checked=false id='signed' placeholder='signed' name='signed')
+            input.form-control(type='checkbox' checked=false id='signed' name='signed')
           div.form-group
-            label(for='Edition') Edition
-            select(id='bill' name='bill')
-                option(value=1) 1st
-                option(value=2) 2nd
-                option(value=3) 3rd
-                option(value=4) 4th
-                option(value=100) 5+
-                option(value=200) Undetermined
-          div
-          div.form-group
-              label(for='bowed') Bowed
+              label(for='bowed' data-toggle='tooltip', title='A condition of the covers or boards of a hard cover book. Bowed covers may turn inward toward the leaves or outward away from the leaves.') Bowed
               input.form-control(type='checkbox' id='bowed' checked=false name='bowed')
-              div
-                span  A condition of the covers or boards of a hard cover book. Bowed covers may turn inward toward the leaves or outward away from the leaves.
-                break
           div.form-group
-              label(for='chipped') Chipped - Used to describe where small pieces are missing from the edges of the boards or where fraying has occurred on a dust jacket or the edge of a paperback.
+              label(for='chipped' data-toggle='tooltip', title='Used to describe where small pieces are missing from the edges of the boards or where fraying has occurred on a dust jacket or the edge of a paperback.') Chipped 
               input.form-control(type='checkbox' id='chipped' checked=false name='chipped')
           div.form-group
-              label(for='dampstained') Dampstained - A light stain on the cover or on the leaves of a book caused by moisture such as a piece of food or perspiration. Generally not as severe as waterstains.
+              label(for='dampstained' data-toggle='tooltip', title='A light stain on the cover or on the leaves of a book caused by moisture such as a piece of food or perspiration. Generally not as severe as waterstains.') Dampstained 
               input.form-control(type='checkbox' id='dampstained' checked=false name='dampstained')
           div.form-group
-              label(for='darkeningFading') Darkening or Fading - When book covers are exposed to light, the color darkens or becomes more intense. See also tape shadow.
+              label(for='darkeningFading' data-toggle='tooltip', title='When book covers are exposed to light, the color darkens or becomes more intense. See also tape shadow.') Darkening or Fading
               input.form-control(type='checkbox' id='darkeningFading'  checked=false name='darkeningFading')
           div.form-group
-              label(for='edgeworn') Edgeworn - Wear along the edges of hardback book covers.
-              input.form-control(type='checkbox' id='edgeworn'  checked=false name='edgeworn')
+              label(for='edgeworn' data-toggle='tooltip'  title='Wear along the edges of hardback book covers.') Edgeworn
+              input.form-control(type='checkbox' id='edgeworn' checked=false name='edgeworn')
           div.form-group
-              label(for='exLibrary') Ex-library - the book was once owned by, and circulated in, a public library.
+              label(for='exLibrary' data-toggle='tooltip', title='The book was once owned by, and circulated in, a public library.') Ex-library
               input.form-control(type='checkbox' id='exLibrary' checked=false name='exLibrary')
+      .col-md-2.col-md-offset-3
           div.form-group
-              label(for='foxed') Foxed - Brown spotting of the paper caused by a chemical reaction, generally found in 19th century books, particularly in steel engravings of the period.
+              label(for='foxed' data-toggle='tooltip', title='Brown spotting of the paper caused by a chemical reaction, generally found in 19th century books, particularly in steel engravings of the period.') Foxed
               input.form-control(type='checkbox' id='foxed' checked=false name='foxed')
           div.form-group
-              label(for='loose') Loose - The binding is loose such that a well-used book may lay flat and remain open to any page in the book.
+              label(for='loose' data-toggle='tooltip', title='The binding is loose such that a well-used book may lay flat and remain open to any page in the book.') Loose
               input.form-control(type='checkbox' id='loose' checked=false name='loose')
           div.form-group
-              label(for='madeUpCopy') Made-up Copy - A copy of a book whose parts have been assembled from one or more defective copies.
+              label(for='madeUpCopy' data-toggle='tooltip', title='A copy of a book whose parts have been assembled from one or more defective copies.') Made-up Copy
               input.form-control(type='checkbox' id='madeUpCopy' checked=false name='madeUpCopy')
           div.form-group
-              label(for='priceClipped') Price Clipped - The price has been clipped from the corner of the dust jacket.
+              label(for='priceClipped' data-toggle='tooltip', title='The price has been clipped from the corner of the dust jacket.') Price Clipped
               input.form-control(type='checkbox' id='priceClipped' checked=false name='priceClipped')
           div.form-group
-              label(for='reBacked') Re-backed - A book that has been repaired by replacing the spine and mending the hinges.
+              label(for='reBacked' data-toggle='tooltip', title='A book that has been repaired by replacing the spine and mending the hinges.') Re-backed
               input.form-control(type='checkbox' id='reBacked' checked=false name='reBacked')
           div.form-group
-              label(for='reCased') Re-cased - A book that has been glued back into its covers after having been shaken loose.
+              label(for='reCased' data-toggle='tooltip', title='A book that has been glued back into its covers after having been shaken loose.') Re-cased
               input.form-control(type='checkbox' id='reCased' checked=false name='reCased')
           div.form-group
-              label(for='reJointed') Re-jointed - The book has been repaired preserving the original covers, including the spine.
+              label(for='reJointed' data-toggle='tooltip', title='The book has been repaired preserving the original covers, including the spine.') Re-jointed
               input.form-control(type='checkbox' id='reJointed' checked=false name='reJointed')
           div.form-group
-              label(for='shaken') Shaken - A book whose pages are beginning to come loose from the binding.
+              label(for='shaken' data-toggle='tooltip', title='A book whose pages are beginning to come loose from the binding.') Shaken
               input.form-control(type='checkbox' id='shaken' checked=false name='shaken')
           div.form-group
-              label(for='shelfWear') Shelf Wear - The wear that occurs as a book is placed onto and removed from a shelf. It may be to the tail (bottom) edge of the covers as they rub against the shelf, to the dust jacket or exterior of the covers (when no dust jacket is present) as the book rubs against its neighbors, or to the head of the spine which some use to pull the book from the shelf.
+              label(for='shelfWear' data-toggle='tooltip', title='The wear that occurs as a book is placed onto and removed from a shelf. It may be to the tail (bottom) edge of the covers as they rub against the shelf, to the dust jacket or exterior of the covers (when no dust jacket is present) as the book rubs against its neighbors, or to the head of the spine which some use to pull the book from the shelf.') Shelf Wear
               input.form-control(type='checkbox' id='shelfWear' checked=false name='shelfWear')
           div.form-group
-              label(for='sunned') Sunned - Faded from exposure to light or direct sunlight.
+              label(for='sunned' data-toggle='tooltip', title='Faded from exposure to light or direct sunlight.') Sunned
               input.form-control(type='checkbox' id='sunned' checked=false name='sunned')
           div.form-group
-              label(for='tight') Tight - The binding of a new book is very tight and will not open easily.
+              label(for='tight' data-toggle='tooltip', title='The binding of a new book is very tight and will not open easily.') Tight
               input.form-control(type='checkbox' id='tight' checked=false name='tight')
           div.form-group
-              label(for='trimmed') Trimmed - The pages have been cut down to a size smaller than when originally issued.
+              label(for='trimmed' data-toggle='tooltip', title='The pages have been cut down to a size smaller than when originally issued.') Trimmed
               input.form-control(type='checkbox' id='trimmed' checked=false name='trimmed')
           div.form-group
-              label(for='unopened') Unopened - The leaves of the book are still joined at the folds, not slit apart.
+              label(for='unopened' data-toggle='tooltip', title='The leaves of the book are still joined at the folds, not slit apart.') Unopened
               input.form-control(type='checkbox' id='unopened' checked=false name='unopened')
           div.form-group
-              label(for='workingCopy') Working copy - More damaged than a reading copy with multiple defects, may need repair.
+              label(for='workingCopy' data-toggle='tooltip', title='More damaged than a reading copy with multiple defects, may need repair.') Working copy
               input.form-control(type='checkbox' id='workingCopy' checked=false name='workingCopy')
           div.form-group
-              label(for='worming') Worming - Small holes resulting from bookworms (the larvae of various beetles.)
+              label(for='worming' data-toggle='tooltip', title='Small holes resulting from bookworms (the larvae of various beetles.)') Worming
               input.form-control(type='checkbox' id='worming' checked=false name='worming')
           div.form-group
             label(for='comment') Comments
             input.form-control(type='text-area' id='comment' placeholder='comment' name='comment')
           button.btn.btn-primary(type='submit') Submit
+      
