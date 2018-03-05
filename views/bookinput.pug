@@ -1,11 +1,13 @@
+extends layout
+
 block content
   .main.container
     .row
-      .col-md-6.col-md-offset-3
+      .col-md-2.col-md-offset-3
         h1.display-4.m-b-2 Book Input page
         form(method='POST' action='/bookinput')
           div.form-group
-            label(for='evaluator') Evaluator  
+            label(for='evaluator') Evaluator
             input.formt-control(type='text' id='evaluator' placeholder='evaluator' name='evaluator')
           div.form-group
             label(for='firstName') First Name
@@ -23,13 +25,16 @@ block content
             label(for='year') Year
             input.form-control(type='text' id='year' placeholder='year' name='year')
           div.form-group
+            label(for='evaluatedCost') Evaluated Cost
+            input.form-control(type='text' id='evaluatedCost' placeholder='evaluatedCost' name='evaluatedCost')
+          div.form-group
             label(for='condition') Condition
             select(id='bill' name='bill')
                 option(value="veryGood") As New - Immaculate condition as when it was published.
                 option(value="fine") Fine - No defects to the book, jacket or pages.
                 option(value="veryGood") Very Good - Shows some small signs of wear, no tears on either binding or paper.
                 option(value="good") Good - Average used worn book that has all pages or leaves present.
-                option(value="fair") Fair - Worn book that has complete text pages (including those with maps or plates) but may lack endpapers, half-title, etc. (which must be noted). Binding, jacket (if any), etc., may also be worn. 
+                option(value="fair") Fair - Worn book that has complete text pages (including those with maps or plates) but may lack endpapers, half-title, etc. (which must be noted). Binding, jacket (if any), etc., may also be worn.
                 option(value="poor") Poor - May be soiled, scuffed, stained or spotted and may have loose joints, hinges, pages - sufficiently worn.
                 option(value="bindingCopy") Binding Copy - The pages or leaves are perfect but the binding is very bad, loose, off, or nonexistent.
                 option(value="readingCopy") Reading Copy - A poor to fair condition book that includes all text presented in a legible fashion.
@@ -47,13 +52,17 @@ block content
             select(id='bill' name='bill')
                 option(value=1) 1st
                 option(value=2) 2nd
-                option(value=3) 3rd 
+                option(value=3) 3rd
                 option(value=4) 4th
                 option(value=100) 5+
                 option(value=200) Undetermined
+          div
           div.form-group
-              label(for='bowed') Bowed - A condition of the covers or boards of a hard cover book. Bowed covers may turn inward toward the leaves or outward away from the leaves.
+              label(for='bowed') Bowed
               input.form-control(type='checkbox' id='bowed' checked=false name='bowed')
+              div
+                span  A condition of the covers or boards of a hard cover book. Bowed covers may turn inward toward the leaves or outward away from the leaves.
+                break
           div.form-group
               label(for='chipped') Chipped - Used to describe where small pieces are missing from the edges of the boards or where fraying has occurred on a dust jacket or the edge of a paperback.
               input.form-control(type='checkbox' id='chipped' checked=false name='chipped')
@@ -117,4 +126,4 @@ block content
           div.form-group
             label(for='comment') Comments
             input.form-control(type='text-area' id='comment' placeholder='comment' name='comment')
-          button.btn.btn-primary(type='submit') Submit 
+          button.btn.btn-primary(type='submit') Submit
