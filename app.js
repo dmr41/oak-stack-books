@@ -4,13 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var _ = require('lodash');
 var index = require('./routes/index');
 // var users = require('./routes/users');
 var booklist = require('./routes/booklist.js');
 var bookinput = require('./routes/bookinput.js');
 
 var app = express();
+
+var cookieSession = require('cookie-session')
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,20 +27,76 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
+app.set('trust proxy', 1);
+app.use(cookieSession({
+  name: 'session',
+  keys: ['23ses332sd3saaac', 'tsasdSesas422a2qsa'],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
+async function savedSession(req) {
+  let saved = await req.session.save();
+  return saved;
+}
 app.use('/', index);
 // app.use('/users', users);
 app.use('/booklist', booklist)
-app.post('/bookinput', (req, res, next) => {
-    console.log("body",req.body);
-  res.render('bookinput', { title: 'Express' });
-});
 
 app.all('*', (req, res, next) => {
-    console.log(req.body);
-    console.log(req.path);
+  let allowedPaths = ['/','/main']
+  let isAllowed = _.includes(allowedPaths, req.path)
+  if(isAllowed || (req.session.verified === true)) {
     next();
+  } else {
+    res.render('error', {message: "Errored Out", error: {status: 'Bad Session', stack: '[]'}})
+  }
 })
+app.post('/main', (req, res, next) => {
+  req.session.verified = false;
+  let username = req.body.email;
+  let password = req.body.password;
+  let acceptedEmails = ['daniel.rivers@gmail.com', 'dmr41.rivers@gmail.com'];
+  let isAcceptedUser = _.includes(acceptedEmails, username);
+  console.log("username", isAcceptedUser);
+  if (process.env.NODE_ENV && isAcceptedUser) {
+    let storedToken = process.env.accessTokeny;
+    let isCorrectToken = (password === storedToken);
+    if (isCorrectToken) {
+      req.session.verified = true;
+    }
+  } else if(isAcceptedUser) {
+    req.session.verified = true;
+  }
+  return savedSession(req)
+    .then((sessionResult) => {
+      if(req.session.verified) {
+        res.render('main')
+      } else {
+        res.render('index')
+      }
+    })
+    .catch((errr) => {
+      console.log("saveError", errr);
+        res.render('/');
+    })
+});
+app.get('/bookinput', (req, res, next) => {
+    res.render('bookinput');
+});
+
+app.get('/booklist', (req, res, next) => {
+    res.render('booklist')
+})
+app.post('/bookcreate', (req, res, next) => {
+  if(req.session.verified) {
+    console.log("bookcreate",req.body);
+  } else {
+    res.render('index')
+  }
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
