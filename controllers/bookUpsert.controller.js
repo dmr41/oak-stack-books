@@ -9,20 +9,30 @@ let _ = require('lodash');
 // function evaluateDustJacket(value) {
 // 	let duskJacketCondition = ['missing', 'excellent', 'good', 'fair', 'poor', 'neverIssued']
 // }
+function runErrorcode(message) {
+	throw new Error(message);
+}
+
+function integerEvaluation(value) {
+	console.log("vasd", value);
+	if (!value) throw new Error("Year is required")
+	let parseAttempt = parseInt(value, 10);
+	let notANumber = _.isNaN(parseAttempt);
+	if (!notANumber) return parseAttempt;
+	throw new Error(`${value} is not an integer!`)
+}
 class BookUpsertController {
 	constructor(session, createInput) {
-		console.log('create', createInput);
 		if(!createInput) throw new Error("no input fields passed")
-		console.log("sname");
 		this.session = session;
 		this.books = db.books;
 		this.inputValidator = {
 				evaluator: `${session.firstName} ${session.firstName}`,
   			first: createInput.first ? createInput.first : null,
-  			last: createInput.last ? createInput.last : null,
-  			title: createInput.title ? createInput.title : null,
+  			last: createInput.last ? createInput.last : runErrorcode('Last Name is required'),
+  			title: createInput.title ? createInput.title : runErrorcode('Title is required'),
   			publisher: createInput.publisher ? createInput.publisher : null,
-  			year: '',
+  			year: integerEvaluation(createInput.year),
   			evaluatedCost: '',
   			comment: '',
   			condition: 'veryGood',

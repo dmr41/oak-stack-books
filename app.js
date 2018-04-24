@@ -58,7 +58,6 @@ app.post('/main', (req, res, next) => {
   let password = req.body.password;
   let acceptedEmails = ['daniel.rivers@gmail.com', 'dmr41.rivers@gmail.com'];
   let isAcceptedUser = _.includes(acceptedEmails, username);
-  console.log("username", isAcceptedUser);
   if (process.env.NODE_ENV && isAcceptedUser) {
     let storedToken = process.env.accessTokeny;
     let isCorrectToken = (password === storedToken);
@@ -100,7 +99,7 @@ app.get('/booklist', (req, res, next) => {
 app.post('/bookcreate', (req, res, next) => {
   try {
     console.log("ok");
-    let newCreate = new BookUpsertController(req.session);
+    let newCreate = new BookUpsertController(req.session, req.body);
     console.log(req.session);
     if(req.session.verified) {
       console.log("bookcreate",req.body);
