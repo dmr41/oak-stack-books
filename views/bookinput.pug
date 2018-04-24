@@ -7,9 +7,12 @@ block content
           .container
             .row
               .col-md-4.col-md-offset-3
-                div.form-group
-                  label(for='evaluator') Evaluator
-                  input.formt-control(type='text' id='evaluator' placeholder='evaluator' name='evaluator')
+                if data
+                  div.form-group
+                    label(for='evaluator') Evaluator is #{data.firstName} #{data.lastName}
+                if message
+                  div.form-group
+                    label(for='error') Error #{message}
                 div.form-group
                   label(for='firstName') First Name
                   input.form-control(type='text' id='firstName' placeholder='first name' name='first')
@@ -32,7 +35,7 @@ block content
                   label(for='comment') Comments
                   //- textarea class="form-control" rows="5" id="comment"
                   textarea.form-control(type='text-area' rows=5 id='comment' placeholder='comment' name='comment')
-              .col-md-4.col-md-offset-6    
+              .col-md-4.col-md-offset-6
                 table.form-group(class='table')
                   thead(class='thead-dark')
                     tr
@@ -44,7 +47,7 @@ block content
                         label(for='condition') Condition
                       td
                         select(id='condition' name='condition')
-                          option(value="veryGood") As New
+                          option(value="asNew") As New
                           option(value="fine") Fine
                           option(value="veryGood") Very Good
                           option(value="good") Good
@@ -66,12 +69,12 @@ block content
                         label(for='dustJacket') Dust Jacket
                       td
                         select(id='dustJacket' name='dustJacket')
-                          option(value=1) Missing
-                          option(value=2) Excellent
-                          option(value=3) Good
-                          option(value=4) Fair
-                          option(value=5) Poor
-                          option(value=6) Never Issued
+                          option(value=missing) Missing
+                          option(value=excellent) Excellent
+                          option(value=good) Good
+                          option(value=fair) Fair
+                          option(value=poor) Poor
+                          option(value=neverIssued) Never Issued
                     tr
                       td
                         label(for='Edition') Edition
@@ -87,52 +90,52 @@ block content
                       td
                         label(for='isSlate') Slate book
                       td
-                        input.formt-control(type='checkbox' checked=false id='isSlate' name='isSlate')
+                        input.formt-control(type='checkbox' value='true' checked=false id='isSlate' name='isSlate')
                     tr
                       td
                         label(for='signed') Signed
                       td
-                        input.form-control(type='checkbox' checked=false id='signed' name='signed')
+                        input.form-control(type='checkbox' value='true' checked=false id='signed' name='signed')
                     tr
                       td
                         label(for='bowed' data-toggle='tooltip', title='A condition of the covers or boards of a hard cover book. Bowed covers may turn inward toward the leaves or outward away from the leaves.') Bowed
                       td
-                        input.form-control(type='checkbox' id='bowed' checked=false name='bowed')
+                        input.form-control(type='checkbox' id='bowed' value='true' checked=false name='bowed')
                     tr
                       td
-                        label(for='chipped' data-toggle='tooltip', title='Used to describe where small pieces are missing from the edges of the boards or where fraying has occurred on a dust jacket or the edge of a paperback.') Chipped 
+                        label(for='chipped' data-toggle='tooltip', title='Used to describe where small pieces are missing from the edges of the boards or where fraying has occurred on a dust jacket or the edge of a paperback.') Chipped
                       td
-                        input.form-control(type='checkbox' id='chipped' checked=false name='chipped')
+                        input.form-control(type='checkbox' id='chipped' value='true' checked=false name='chipped')
                     tr
                       td
-                        label(for='dampstained' data-toggle='tooltip', title='A light stain on the cover or on the leaves of a book caused by moisture such as a piece of food or perspiration. Generally not as severe as waterstains.') Dampstained 
+                        label(for='dampstained' data-toggle='tooltip', title='A light stain on the cover or on the leaves of a book caused by moisture such as a piece of food or perspiration. Generally not as severe as waterstains.') Dampstained
                       td
-                        input.form-control(type='checkbox' id='dampstained' checked=false name='dampstained')
+                        input.form-control(type='checkbox' id='dampstained' value='true' checked=false name='dampstained')
                     tr
                       td
                         label(for='darkeningFading' data-toggle='tooltip', title='When book covers are exposed to light, the color darkens or becomes more intense. See also tape shadow.') Darkening or Fading
                       td
-                        input.form-control(type='checkbox' id='darkeningFading'  checked=false name='darkeningFading')
+                        input.form-control(type='checkbox' id='darkeningFading'  value='true' checked=false name='darkeningFading')
                     tr
                       td
                         label(for='edgeworn' data-toggle='tooltip'  title='Wear along the edges of hardback book covers.') Edgeworn
                       td
-                        input.form-control(type='checkbox' id='edgeworn' checked=false name='edgeworn')
+                        input.form-control(type='checkbox' id='edgeworn' value='true' checked=false name='edgeworn')
                     tr
                       td
                         label(for='exLibrary' data-toggle='tooltip', title='The book was once owned by, and circulated in, a public library.') Ex-library
                       td
-                        input.form-control(type='checkbox' id='exLibrary' checked=false name='exLibrary')
+                        input.form-control(type='checkbox' id='exLibrary' value='true' checked=false name='exLibrary')
                     tr
                       td
                         label(for='foxed' data-toggle='tooltip', title='Brown spotting of the paper caused by a chemical reaction, generally found in 19th century books, particularly in steel engravings of the period.') Foxed
                       td
-                        input.form-control(type='checkbox' id='foxed' checked=false name='foxed')
+                        input.form-control(type='checkbox' id='foxed' value='true' checked=false name='foxed')
                     tr
                       td
                         label(for='loose' data-toggle='tooltip', title='The binding is loose such that a well-used book may lay flat and remain open to any page in the book.') Loose
                       td
-                        input.form-control(type='checkbox' id='loose' checked=false name='loose')
+                        input.form-control(type='checkbox' id='loose' value='true' checked=false name='loose')
               .col-md-3.col-md-offset-3
                   table(class='table')
                     thead(class='thead-dark')
@@ -147,66 +150,65 @@ block content
                         td
                           label(for='madeUpCopy' data-toggle='tooltip', title='A copy of a book whose parts have been assembled from one or more defective copies.') Made-up Copy
                         td
-                          input.form-control(type='checkbox' id='madeUpCopy' checked=false name='madeUpCopy')
+                          input.form-control(type='checkbox' id='madeUpCopy' value='true' checked=false name='madeUpCopy')
                       tr
                         td
                           label(for='priceClipped' data-toggle='tooltip', title='The price has been clipped from the corner of the dust jacket.') Price Clipped
                         td
-                          input.form-control(type='checkbox' id='priceClipped' checked=false name='priceClipped')
+                          input.form-control(type='checkbox' id='priceClipped' value='true' checked=false name='priceClipped')
                       tr
                         td
                           label(for='reBacked' data-toggle='tooltip', title='A book that has been repaired by replacing the spine and mending the hinges.') Re-backed
                         td
-                          input.form-control(type='checkbox' id='reBacked' checked=false name='reBacked')
+                          input.form-control(type='checkbox' id='reBacked' value='true' checked=false name='reBacked')
                       tr
                         td
                           label(for='reCased' data-toggle='tooltip', title='A book that has been glued back into its covers after having been shaken loose.') Re-cased
                         td
-                          input.form-control(type='checkbox' id='reCased' checked=false name='reCased')
+                          input.form-control(type='checkbox' id='reCased' value='true' checked=false name='reCased')
                       tr
                         td
                           label(for='reJointed' data-toggle='tooltip', title='The book has been repaired preserving the original covers, including the spine.') Re-jointed
                         td
-                          input.form-control(type='checkbox' id='reJointed' checked=false name='reJointed')
+                          input.form-control(type='checkbox' id='reJointed' value='true' checked=false name='reJointed')
                       tr
                         td
                           label(for='shaken' data-toggle='tooltip', title='A book whose pages are beginning to come loose from the binding.') Shaken
                         td
-                          input.form-control(type='checkbox' id='shaken' checked=false name='shaken')
+                          input.form-control(type='checkbox' id='shaken' value='true' checked=false name='shaken')
                       tr
                         td
                           label(for='shelfWear' data-toggle='tooltip', title='The wear that occurs as a book is placed onto and removed from a shelf. It may be to the tail (bottom) edge of the covers as they rub against the shelf, to the dust jacket or exterior of the covers (when no dust jacket is present) as the book rubs against its neighbors, or to the head of the spine which some use to pull the book from the shelf.') Shelf Wear
                         td
-                          input.form-control(type='checkbox' id='shelfWear' checked=false name='shelfWear')
+                          input.form-control(type='checkbox' id='shelfWear' value='true' checked=false name='shelfWear')
                       tr
                         td
                           label(for='sunned' data-toggle='tooltip', title='Faded from exposure to light or direct sunlight.') Sunned
                         td
-                          input.form-control(type='checkbox' id='sunned' checked=false name='sunned')
+                          input.form-control(type='checkbox' id='sunned' value='true' checked=false name='sunned')
                       tr
                         td
                           label(for='tight' data-toggle='tooltip', title='The binding of a new book is very tight and will not open easily.') Tight
                         td
-                          input.form-control(type='checkbox' id='tight' checked=false name='tight')
+                          input.form-control(type='checkbox' id='tight' value='true' checked=false name='tight')
                       tr
                         td
                           label(for='trimmed' data-toggle='tooltip', title='The pages have been cut down to a size smaller than when originally issued.') Trimmed
                         td
-                          input.form-control(type='checkbox' id='trimmed' checked=false name='trimmed')
+                          input.form-control(type='checkbox' id='trimmed' value='true' checked=false name='trimmed')
                       tr
                         td
                           label(for='unopened' data-toggle='tooltip', title='The leaves of the book are still joined at the folds, not slit apart.') Unopened
                         td
-                          input.form-control(type='checkbox' id='unopened' checked=false name='unopened')
+                          input.form-control(type='checkbox' id='unopened' value='true' checked=false name='unopened')
                       tr
                         td
                           label(for='workingCopy' data-toggle='tooltip', title='More damaged than a reading copy with multiple defects, may need repair.') Working copy
                         td
-                          input.form-control(type='checkbox' id='workingCopy' checked=false name='workingCopy')
+                          input.form-control(type='checkbox' id='workingCopy' value='true' checked=false name='workingCopy')
                       tr
                         td
                           label(for='worming' data-toggle='tooltip', title='Small holes resulting from bookworms (the larvae of various beetles.)') Worming
                         td
-                          input.form-control(type='checkbox' id='worming' checked=false name='worming')
+                          input.form-control(type='checkbox' id='worming' value='true' checked=false name='worming')
           button.btn.btn-primary(type='submit') Submit
-      

@@ -13,7 +13,7 @@ var bookinput = require('./routes/bookinput.js');
 var app = express();
 
 var cookieSession = require('cookie-session')
-
+var BookUpsertController = require('./controllers/bookUpsert.controller.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -66,6 +66,13 @@ app.post('/main', (req, res, next) => {
       req.session.verified = true;
     }
   } else if(isAcceptedUser) {
+    if(req.body.email.toLowerCase() === 'daniel.rivers@gmail.com') {
+      req.session.firstName = 'Daniel';
+      req.session.lastName = 'Rivers';
+    } else if(req.body.email.toLowerCase() === 'dmr41.rivers@gmail.com') {
+      req.session.firstName = 'David';
+      req.session.lastName = 'Rivers';
+    }
     req.session.verified = true;
   }
   return savedSession(req)
@@ -82,17 +89,28 @@ app.post('/main', (req, res, next) => {
     })
 });
 app.get('/bookinput', (req, res, next) => {
-    res.render('bookinput');
+    res.render('bookinput', { title: 'Title',
+     sub: true,
+     data: req.session });
 });
 
 app.get('/booklist', (req, res, next) => {
     res.render('booklist')
 })
 app.post('/bookcreate', (req, res, next) => {
-  if(req.session.verified) {
-    console.log("bookcreate",req.body);
-  } else {
-    res.render('index')
+  try {
+    console.log("ok");
+    let newCreate = new BookUpsertController(req.session);
+    console.log(req.session);
+    if(req.session.verified) {
+      console.log("bookcreate",req.body);
+    } else {
+      console.log("still");
+      res.render('index')
+    }
+  } catch(error) {
+    console.log("aaa",error);
+    res.status(500).render('bookinput', { message: error.message })
   }
 });
 
