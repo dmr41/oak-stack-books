@@ -1,3 +1,4 @@
+
 let db = {};
 process.env.DATABASE_URL = 'postgres://ivixbrpzginrsp:f50974897d587ce7d51a4171ff9e588d513aaa76f2b78ef487d0c63057ca8d35@ec2-50-17-206-214.compute-1.amazonaws.com:5432/d1lo1vkld8tugf';
 require('pg').defaults.parseInt8 = true;
@@ -16,10 +17,12 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
 });
 
 function modelsToSync() {
-	let modPath = './models/books.model.js';
-	let model = sequelize.import(path.resolve(modPath));
-	console.log("sss", model);
-	db[model.name] = model;
+	let modelPaths = ['./models/book.model.js', './models/condition.model.js'];
+	for(let i = 0; i < modelPaths.length; ++i) {
+		let model = sequelize.import(path.resolve(modelPaths[i]));
+		console.log("sss", model);
+		db[model.name] = model;
+	}
 }
 
 function initSeq() {

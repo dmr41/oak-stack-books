@@ -47,6 +47,7 @@ block content
                         label(for='condition') Condition
                       td
                         select(id='condition' name='condition')
+                          option(value=unselected) ----
                           option(value="asNew") As New
                           option(value="fine") Fine
                           option(value="veryGood") Very Good
@@ -69,6 +70,7 @@ block content
                         label(for='dustJacket') Dust Jacket
                       td
                         select(id='dustJacket' name='dustJacket')
+                          option(value=unselected) ----
                           option(value=missing) Missing
                           option(value=excellent) Excellent
                           option(value=good) Good
@@ -80,6 +82,7 @@ block content
                         label(for='Edition') Edition
                       td
                         select(id='edition' name='edition')
+                          option(value=0) ----
                           option(value=1) 1st
                           option(value=2) 2nd
                           option(value=3) 3rd

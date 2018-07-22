@@ -9,7 +9,7 @@ var index = require('./routes/index');
 // var users = require('./routes/users');
 var booklist = require('./routes/booklist.js');
 var bookinput = require('./routes/bookinput.js');
-
+var https = require('https');
 var app = express();
 
 var cookieSession = require('cookie-session')
@@ -52,7 +52,8 @@ app.all('*', (req, res, next) => {
     res.render('error', {message: "Errored Out", error: {status: 'Bad Session', stack: '[]'}})
   }
 })
-app.post('/main', (req, res, next) => {
+app.post('/main', async (req, res, next) => {
+
   req.session.verified = false;
   let username = req.body.email;
   let password = req.body.password;
