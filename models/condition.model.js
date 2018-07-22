@@ -9,6 +9,9 @@ module.exports = (db, DataTypes) => {
 			book_id: {
 				type: DataTypes.TEXT
 			},
+			evaluator: {
+				type: DataTypes.TEXT
+			},
 			condition: {
 				type: DataTypes.TEXT
 			},

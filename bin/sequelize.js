@@ -20,14 +20,15 @@ function modelsToSync() {
 	let modelPaths = ['./models/book.model.js', './models/condition.model.js'];
 	for(let i = 0; i < modelPaths.length; ++i) {
 		let model = sequelize.import(path.resolve(modelPaths[i]));
-		console.log("sss", model);
+		// console.log("sss", model);
 		db[model.name] = model;
 	}
 }
 
 function initSeq() {
 	modelsToSync();
-	return sequelize.sync();
+	// return sequelize.sync();
+	return Promise.resolve(sequelize);
 }
 
 db.Sequelize = Sequelize;

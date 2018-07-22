@@ -14,11 +14,11 @@ block content
                   div.form-group
                     label(for='error') Error #{message}
                 div.form-group
-                  label(for='firstName') First Name
-                  input.form-control(type='text' id='firstName' placeholder='first name' name='first')
+                  label(for='first_name') First Name
+                  input.form-control(type='text' id='first_name' placeholder='first name' name='first_name')
                 div.form-group
-                  label(for='lastName') Last Name
-                  input.form-control(type='text' id='lastName' placeholder='last name' name='last')
+                  label(for='last_name') Last Name
+                  input.form-control(type='text' id='last_name' placeholder='last name' name='last_name')
                 div.form-group
                   label(for='title') Title
                   input.form-control(type='text' id='title' placeholder='title' name='title')
@@ -29,8 +29,11 @@ block content
                   label(for='year') Year
                   input.form-control(type='text' id='year' placeholder='year' name='year')
                 div.form-group
-                  label(for='evaluatedCost') Evaluated Cost
-                  input.form-control(type='text' id='evaluatedCost' placeholder='evaluatedCost' name='evaluatedCost')
+                  label(for='dwr_evaluated') DWR valued
+                  input.form-control(type='checkbox' id='dwr_evaluated' value='true' checked=false name='dwr_evaluated')
+                div.form-group
+                  label(for='pre_evaluated_cost') Evaluated Cost
+                  input.form-control(type='text' id='pre_evaluated_cost' placeholder='evaluatedCost' name='pre_evaluated_cost')
                 div.form-group
                   label(for='comment') Comments
                   //- textarea class="form-control" rows="5" id="comment"
@@ -47,7 +50,7 @@ block content
                         label(for='condition') Condition
                       td
                         select(id='condition' name='condition')
-                          option(value=unselected) ----
+                          option(value='') ----
                           option(value="asNew") As New
                           option(value="fine") Fine
                           option(value="veryGood") Very Good
@@ -70,7 +73,7 @@ block content
                         label(for='dustJacket') Dust Jacket
                       td
                         select(id='dustJacket' name='dustJacket')
-                          option(value=unselected) ----
+                          option(value='') ----
                           option(value=missing) Missing
                           option(value=excellent) Excellent
                           option(value=good) Good
@@ -82,7 +85,7 @@ block content
                         label(for='Edition') Edition
                       td
                         select(id='edition' name='edition')
-                          option(value=0) ----
+                          option(value='') ----
                           option(value=1) 1st
                           option(value=2) 2nd
                           option(value=3) 3rd
@@ -91,14 +94,14 @@ block content
                           option(value=200) Undetermined
                     tr
                       td
-                        label(for='isSlate') Slate book
+                        label(for='slate') Slate book
                       td
-                        input.formt-control(type='checkbox' value='true' checked=false id='isSlate' name='isSlate')
+                        input.formt-control(type='checkbox' value='true' checked=false id='slate' name='slate')
                     tr
                       td
-                        label(for='signed') Signed
+                        label(for='signed_by_author') Signed
                       td
-                        input.form-control(type='checkbox' value='true' checked=false id='signed' name='signed')
+                        input.form-control(type='checkbox' value='true' checked=false id='signed_by_author' name='signed_by_author')
                     tr
                       td
                         label(for='bowed' data-toggle='tooltip', title='A condition of the covers or boards of a hard cover book. Bowed covers may turn inward toward the leaves or outward away from the leaves.') Bowed

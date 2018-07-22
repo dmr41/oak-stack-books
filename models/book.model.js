@@ -26,6 +26,9 @@ module.exports = (db, DataTypes) => {
 			},
 			pre_evaluated_cost: {
 				type: DataTypes.INTEGER
+			},
+			dwr_evaluated: {
+				type: DataTypes.BOOLEAN
 			}
 		},
 		{

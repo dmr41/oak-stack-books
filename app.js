@@ -99,13 +99,11 @@ app.get('/booklist', (req, res, next) => {
 })
 app.post('/bookcreate', (req, res, next) => {
   try {
-    console.log("ok");
     let newCreate = new BookUpsertController(req.session, req.body);
-    console.log(req.session);
+    console.log('state', newCreate.inputValidator);
     if(req.session.verified) {
-      console.log("bookcreate",req.body);
+      // console.log("bookcreate",req.body);
     } else {
-      console.log("still");
       res.render('index')
     }
   } catch(error) {
